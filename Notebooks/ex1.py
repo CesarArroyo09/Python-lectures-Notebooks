@@ -1,7 +1,8 @@
-# This write the current cell to a file
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 def f1(x):
     """
-    This is an example of a function, returning x**2
+    This is an example of a function, that returns x^2
     - parameter: x
     """
     return x**2
