@@ -51,6 +51,7 @@ I. `Introduction to python <Notebooks/intro_Python.ipynb>`_ `(PDF version) <Note
   - classical way
   - using numpy.loadtxt
   - using numpy.genfromtxt
+  - using pandas.read_csv
   - Dealing with missing data
   - Data in a fixed size format
   - Writing files
