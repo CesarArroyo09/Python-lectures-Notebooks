@@ -1,4 +1,3 @@
-
 import numpy as np
 import os
 from urllib.request import urlopen
@@ -13,8 +12,6 @@ class Stel_Spectrum(object):
     """
     
     spec_count = 0 # This attibute is at the level of the class, not of the object.
-    
-    @profile
     def __init__(self, filename=None, T=None, logg=None, verbose=False):
         """
         Initialisation of the Stel_Spectrum object.
@@ -42,8 +39,7 @@ class Stel_Spectrum(object):
         Stel_Spectrum.spec_count += 1
         if self.verbose:
             print('Instantiation done')
-
-    @profile
+            
     def dlfile(self):
         """
         Downloading file if not already here. Put it in the current directory
@@ -64,10 +60,9 @@ class Stel_Spectrum(object):
                 self.file_found=False
         else:
             if self.verbose:
-                print('{} already on disk'.format(self.filename))
+                print('{} already on disk'.format(self.filenames))
             self.file_found=True
-    
-    @profile
+                
     def read_data(self):
         """
         read the data from the file
@@ -134,14 +129,13 @@ class Stel_Spectrum(object):
     
     def __getlogg(self): 
         return self.__logg
-
-    @profile
+    
     def __setlogg(self, value):
         try:
             self.__logg 
         except:
             self.__logg = -1
-        if not isinstance(value, (int, long, float)):
+        if not isinstance(value, (int, float)):
             raise TypeError('logg must be an integer or a float')
         if float(value) not in (-1., 5., 6., 7. ,8., 9.):
             raise ValueError('Error, logg must be 6, 7, 8, or 9')
@@ -175,10 +169,6 @@ class Stel_Spectrum(object):
     def __del__(self):
         Stel_Spectrum.spec_count -= 1
 
-spectra = [] # we create an empty list
-for T in np.linspace(40000, 190000, 4): # this is the list of available temperature (check the site)
-    spectra.append(Stel_Spectrum(T=T, logg=6, verbose=True)) # we fill the list with the objects for each temperature
-T = np.array([sp.T for sp in spectra])
-F = np.array([sp.get_integ() for sp in spectra])
-for t, f in zip(T, F):
-    print('Temperature = {0:.0f}K, Flux = {1:.2e} erg/s/cm2'.format(t, f))
+sp = Stel_Spectrum(T=100000, logg=6, verbose=True)
+print('ending')
+print(sp.filename)

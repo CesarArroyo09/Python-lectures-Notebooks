@@ -1,7 +1,9 @@
 
 import numpy as np
 import os
-import urllib2
+from urllib.request import urlopen
+# In python 2, it was:
+# from urllib2 import urlopen
 from scipy.integrate import simps
 from memory_profiler import profile
 
@@ -50,7 +52,7 @@ class Stel_Spectrum(object):
             if self.verbose:
                 print('Downloading {}'.format(self.filename))
             try:
-                stel_file = urllib2.urlopen('http://astro.uni-tuebingen.de/~rauch/TMAF/NLTE/He+C+N+O/' + 
+                stel_file = urlopen('http://astro.uni-tuebingen.de/~rauch/TMAF/NLTE/He+C+N+O/' + 
                                             self.filename)
                 output = open(self.filename,'wb')
                 output.write(stel_file.read())
@@ -139,7 +141,7 @@ class Stel_Spectrum(object):
             self.__logg 
         except:
             self.__logg = -1
-        if not isinstance(value, (int, long, float)):
+        if not isinstance(value, (int, float)):
             raise TypeError('logg must be an integer or a float')
         if float(value) not in (-1., 5., 6., 7. ,8., 9.):
             raise ValueError('Error, logg must be 6, 7, 8, or 9')
@@ -159,7 +161,7 @@ class Stel_Spectrum(object):
         """
         Print out the filename and the number of points
         """
-        print self.__repr__()
+        print(self.__repr__())
         
     def __repr__(self):
         """
